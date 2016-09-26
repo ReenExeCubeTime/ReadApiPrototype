@@ -12,7 +12,7 @@ class ApiDeviceControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request('GET', '/api/v1/status.json');
+        $client->request('GET', '/api/status.json');
 
         $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
         $this->assertResponseData(

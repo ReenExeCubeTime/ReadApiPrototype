@@ -5,3 +5,7 @@ app:
 api:
     resource: "@FSAppBundle/Resources/config/routing.yml"
     type: yaml
+
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /api/doc
