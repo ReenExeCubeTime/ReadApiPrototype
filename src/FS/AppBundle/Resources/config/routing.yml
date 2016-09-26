@@ -1,0 +1,6 @@
+status:
+    path:     /api/v{version}/status.{_format}
+    defaults: { _controller: FSAppBundle:ApiDevice:status }
+    requirements:
+        version: \d+
+        _format: json

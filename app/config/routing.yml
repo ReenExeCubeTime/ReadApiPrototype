@@ -1,3 +1,7 @@
 app:
-    resource: "@AppBundle/Controller/"
+    resource: "@FSAppBundle/Controller/"
     type:     annotation
+
+api:
+    resource: "@FSAppBundle/Resources/config/routing.yml"
+    type: yaml
