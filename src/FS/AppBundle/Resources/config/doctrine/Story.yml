@@ -1,0 +1,38 @@
+FS\AppBundle\Entity\Story:
+    type: entity
+    table: rp_story
+
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+
+    fields:
+        text:
+            type: text
+            nullable: false
+            fixed: false
+        categoryId:
+            type: integer
+            nullable: false
+            unsigned: true
+            column: category_id
+        langId:
+            type: integer
+            nullable: false
+            unsigned: true
+            column: lang_id
+        status:
+            type: integer
+            nullable: false
+            unsigned: true
+        created:
+            type: datetime
+            nullable: false
+        updated:
+            type: datetime
+            nullable: false
