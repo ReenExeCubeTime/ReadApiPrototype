@@ -12,7 +12,12 @@ class ApiStoryControllerTest extends AbstractApiControllerTest
 
         $this->expectSuccessStatus($client);
         $this->expectSuccess(
-            [],
+            [
+                [
+                    'id' => 1,
+                    'text' => 'First Story',
+                ]
+            ],
             $client
         );
     }
