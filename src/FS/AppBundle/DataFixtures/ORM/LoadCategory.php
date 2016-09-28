@@ -4,25 +4,22 @@ namespace FS\AppBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use FS\AppBundle\Entity\Story;
+use FS\AppBundle\Entity\Category;
 
-class LoadStory implements FixtureInterface
+class LoadCategory implements FixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $story = new Story();
+        $category = new Category();
 
         $now = new \DateTime();
 
-        $story
-            ->setText('First Story')
-            ->setCategoryId(1)
-            ->setLangId(1)
-            ->setStatus(1)
+        $category
+            ->setName('History')
             ->setCreated($now)
             ->setUpdated($now);
 
-        $manager->persist($story);
+        $manager->persist($category);
         $manager->flush();
     }
 }
