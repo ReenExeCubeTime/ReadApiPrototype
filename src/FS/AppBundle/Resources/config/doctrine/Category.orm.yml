@@ -1,0 +1,25 @@
+FS\AppBundle\Entity\Category:
+    type: entity
+    table: fs_category
+
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+
+    fields:
+        name:
+            type: text
+            nullable: false
+            length: 255
+            fixed: false
+        created:
+            type: datetime
+            nullable: false
+        updated:
+            type: datetime
+            nullable: false
