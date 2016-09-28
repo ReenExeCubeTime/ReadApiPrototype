@@ -10,4 +10,12 @@ namespace FS\AppBundle\Repository;
  */
 class StoryRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getList()
+    {
+        return $this
+            ->createQueryBuilder('s')
+            ->select('s.id, s.text')
+            ->getQuery()
+            ->getArrayResult();
+    }
 }
