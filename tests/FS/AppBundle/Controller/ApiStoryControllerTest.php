@@ -2,17 +2,17 @@
 
 namespace Tests\FS\AppBundle\Controller;
 
-class ApiDeviceControllerTest extends AbstractApiControllerTest
+class ApiStoryControllerTest extends AbstractApiControllerTest
 {
-    public function testStatus()
+    public function testList()
     {
         $client = static::createClient();
 
-        $client->request('GET', '/api/status.json');
+        $client->request('GET', '/api/stories.json');
 
         $this->expectSuccessStatus($client);
         $this->expectJSON(
-            ['version' => 1],
+            [],
             $client
         );
     }

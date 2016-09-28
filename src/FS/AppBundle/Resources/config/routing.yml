@@ -4,3 +4,9 @@ status:
     methods: ['GET']
     requirements:
         _format: json
+list:
+    path:     /api/stories.{_format}
+    defaults: { _controller: FSAppBundle:ApiStory:list }
+    methods: ['GET']
+    requirements:
+        _format: json
