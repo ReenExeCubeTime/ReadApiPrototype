@@ -9,6 +9,7 @@ class ApiDeviceController extends AbstractApiController
 {
     /**
      * @ApiDoc(
+     *      section="device",
      *      description="Is need force update Application",
      *      requirements={
      *          {
