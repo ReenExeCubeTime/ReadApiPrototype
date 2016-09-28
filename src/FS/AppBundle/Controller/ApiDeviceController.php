@@ -2,11 +2,10 @@
 
 namespace FS\AppBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
-class ApiDeviceController extends Controller
+class ApiDeviceController extends AbstractApiController
 {
     /**
      * @ApiDoc(
@@ -23,7 +22,7 @@ class ApiDeviceController extends Controller
      */
     public function statusAction()
     {
-        return new JsonResponse([
+        return $this->createSuccess([
             'version' => $this->container->getParameter('version')
         ]);
     }

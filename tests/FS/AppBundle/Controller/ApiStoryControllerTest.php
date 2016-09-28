@@ -11,7 +11,7 @@ class ApiStoryControllerTest extends AbstractApiControllerTest
         $client->request('GET', '/api/stories.json');
 
         $this->expectSuccessStatus($client);
-        $this->expectJSON(
+        $this->expectSuccess(
             [],
             $client
         );

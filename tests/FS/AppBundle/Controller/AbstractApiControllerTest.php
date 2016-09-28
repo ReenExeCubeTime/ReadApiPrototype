@@ -13,8 +13,14 @@ abstract class AbstractApiControllerTest extends WebTestCase
         $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
     }
 
-    protected function expectJSON(array $expect, Client $client)
+    protected function expectSuccess(array $expect, Client $client)
     {
-        $this->assertEquals($expect, json_decode($client->getResponse()->getContent(), true));
+        $this->assertEquals(
+            [
+                'data' => $expect,
+                'success' => true,
+            ],
+            json_decode($client->getResponse()->getContent(), true)
+        );
     }
 }

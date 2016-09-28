@@ -11,7 +11,7 @@ class ApiDeviceControllerTest extends AbstractApiControllerTest
         $client->request('GET', '/api/status.json');
 
         $this->expectSuccessStatus($client);
-        $this->expectJSON(
+        $this->expectSuccess(
             ['version' => 1],
             $client
         );
