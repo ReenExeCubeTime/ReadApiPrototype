@@ -1,12 +1,20 @@
-status:
+api_status:
     path:     /api/status.{_format}
     defaults: { _controller: FSAppBundle:ApiDevice:status }
     methods: ['GET']
     requirements:
         _format: json
-list:
+
+api_stories:
     path:     /api/stories.{_format}
     defaults: { _controller: FSAppBundle:ApiStory:list }
+    methods: ['GET']
+    requirements:
+        _format: json
+
+api_categories:
+    path:     /api/categories.{_format}
+    defaults: { _controller: FSAppBundle:ApiCategory:list }
     methods: ['GET']
     requirements:
         _format: json

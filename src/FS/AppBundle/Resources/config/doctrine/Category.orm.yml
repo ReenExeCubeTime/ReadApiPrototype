@@ -1,6 +1,7 @@
 FS\AppBundle\Entity\Category:
     type: entity
     table: fs_category
+    repositoryClass: FS\AppBundle\Repository\CategoryRepository
 
     id:
         id:
