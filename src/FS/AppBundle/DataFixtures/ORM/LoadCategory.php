@@ -22,4 +22,9 @@ class LoadCategory implements FixtureInterface
         $manager->persist($category);
         $manager->flush();
     }
+
+    public function getOrder()
+    {
+        return 1;
+    }
 }

@@ -12,16 +12,19 @@ FS\AppBundle\Entity\Story:
             generator:
                 strategy: IDENTITY
 
+    manyToOne:
+        category:
+            targetEntity: FS\AppBundle\Entity\Category
+            fetch: EXTRA_LAZY
+            joinColumn:
+                name: category_id
+                referencedColumnName: id
+
     fields:
         text:
             type: text
             nullable: false
             fixed: false
-        categoryId:
-            type: integer
-            nullable: false
-            unsigned: true
-            column: category_id
         langId:
             type: integer
             nullable: false

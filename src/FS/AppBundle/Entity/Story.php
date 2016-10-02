@@ -20,11 +20,6 @@ class Story
     /**
      * @var integer
      */
-    private $categoryId;
-
-    /**
-     * @var integer
-     */
     private $langId;
 
     /**
@@ -41,6 +36,11 @@ class Story
      * @var \DateTime
      */
     private $updated;
+
+    /**
+     * @var \FS\AppBundle\Entity\Category
+     */
+    private $category;
 
 
     /**
@@ -75,30 +75,6 @@ class Story
     public function getText()
     {
         return $this->text;
-    }
-
-    /**
-     * Set categoryId
-     *
-     * @param integer $categoryId
-     *
-     * @return Story
-     */
-    public function setCategoryId($categoryId)
-    {
-        $this->categoryId = $categoryId;
-
-        return $this;
-    }
-
-    /**
-     * Get categoryId
-     *
-     * @return integer
-     */
-    public function getCategoryId()
-    {
-        return $this->categoryId;
     }
 
     /**
@@ -195,6 +171,30 @@ class Story
     public function getUpdated()
     {
         return $this->updated;
+    }
+
+    /**
+     * Set category
+     *
+     * @param \FS\AppBundle\Entity\Category $category
+     *
+     * @return Story
+     */
+    public function setCategory(\FS\AppBundle\Entity\Category $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \FS\AppBundle\Entity\Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 }
 

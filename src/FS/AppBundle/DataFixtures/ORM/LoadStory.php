@@ -14,9 +14,11 @@ class LoadStory implements FixtureInterface
 
         $now = new \DateTime();
 
+        $category = $manager->getRepository('FSAppBundle:Category')->find(1);
+
         $story
             ->setText('First Story')
-            ->setCategoryId(1)
+            ->setCategory($category)
             ->setLangId(1)
             ->setStatus(1)
             ->setCreated($now)
@@ -24,5 +26,10 @@ class LoadStory implements FixtureInterface
 
         $manager->persist($story);
         $manager->flush();
+    }
+
+    public function getOrder()
+    {
+        return 2;
     }
 }
