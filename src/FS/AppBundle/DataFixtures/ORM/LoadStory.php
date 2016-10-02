@@ -2,11 +2,12 @@
 
 namespace FS\AppBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use FS\AppBundle\Entity\Story;
 
-class LoadStory implements FixtureInterface
+class LoadStory extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
@@ -14,7 +15,7 @@ class LoadStory implements FixtureInterface
 
         $now = new \DateTime();
 
-        $category = $manager->getRepository('FSAppBundle:Category')->find(1);
+        $category = $this->getReference('category-history');
 
         $story
             ->setText('First Story')

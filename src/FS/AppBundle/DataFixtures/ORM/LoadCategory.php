@@ -2,11 +2,12 @@
 
 namespace FS\AppBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use FS\AppBundle\Entity\Category;
 
-class LoadCategory implements FixtureInterface
+class LoadCategory extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
@@ -21,6 +22,8 @@ class LoadCategory implements FixtureInterface
 
         $manager->persist($category);
         $manager->flush();
+
+        $this->addReference('category-history', $category);
     }
 
     public function getOrder()
