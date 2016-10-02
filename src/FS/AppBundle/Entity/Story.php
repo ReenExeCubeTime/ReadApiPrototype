@@ -20,11 +20,6 @@ class Story
     /**
      * @var integer
      */
-    private $langId;
-
-    /**
-     * @var integer
-     */
     private $status;
 
     /**
@@ -41,6 +36,11 @@ class Story
      * @var \FS\AppBundle\Entity\Category
      */
     private $category;
+
+    /**
+     * @var \FS\AppBundle\Entity\Language
+     */
+    private $language;
 
 
     /**
@@ -75,30 +75,6 @@ class Story
     public function getText()
     {
         return $this->text;
-    }
-
-    /**
-     * Set langId
-     *
-     * @param integer $langId
-     *
-     * @return Story
-     */
-    public function setLangId($langId)
-    {
-        $this->langId = $langId;
-
-        return $this;
-    }
-
-    /**
-     * Get langId
-     *
-     * @return integer
-     */
-    public function getLangId()
-    {
-        return $this->langId;
     }
 
     /**
@@ -195,6 +171,30 @@ class Story
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Set language
+     *
+     * @param \FS\AppBundle\Entity\Language $language
+     *
+     * @return Story
+     */
+    public function setLanguage(\FS\AppBundle\Entity\Language $language = null)
+    {
+        $this->language = $language;
+
+        return $this;
+    }
+
+    /**
+     * Get language
+     *
+     * @return \FS\AppBundle\Entity\Language
+     */
+    public function getLanguage()
+    {
+        return $this->language;
     }
 }
 

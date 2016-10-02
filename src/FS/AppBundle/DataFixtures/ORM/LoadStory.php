@@ -16,11 +16,12 @@ class LoadStory extends AbstractFixture implements OrderedFixtureInterface
         $now = new \DateTime();
 
         $category = $this->getReference('category-history');
+        $language = $this->getReference('language-ukrainian');
 
         $story
             ->setText('First Story')
             ->setCategory($category)
-            ->setLangId(1)
+            ->setLanguage($language)
             ->setStatus(1)
             ->setCreated($now)
             ->setUpdated($now);

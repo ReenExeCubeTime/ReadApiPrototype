@@ -20,16 +20,18 @@ FS\AppBundle\Entity\Story:
                 name: category_id
                 referencedColumnName: id
 
+        language:
+            targetEntity: FS\AppBundle\Entity\Language
+            fetch: EXTRA_LAZY
+            joinColumn:
+                name: language_id
+                referencedColumnName: id
+
     fields:
         text:
             type: text
             nullable: false
             fixed: false
-        langId:
-            type: integer
-            nullable: false
-            unsigned: true
-            column: lang_id
         status:
             type: integer
             nullable: false
