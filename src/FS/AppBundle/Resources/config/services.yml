@@ -1,0 +1,5 @@
+services:
+    fs.category.data.provider:
+        class: 'FS\AppBundle\Service\CategoryDataProvider'
+        arguments:
+            - '@doctrine'

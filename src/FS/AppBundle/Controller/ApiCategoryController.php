@@ -16,10 +16,7 @@ class ApiCategoryController extends AbstractApiController
      */
     public function listAction()
     {
-        $categories = $this
-            ->getDoctrine()
-            ->getRepository('FSAppBundle:Category')
-            ->getList();
+        $categories = $this->get('fs.category.data.provider')->getList();
 
         return $this->createSuccess($categories);
     }
