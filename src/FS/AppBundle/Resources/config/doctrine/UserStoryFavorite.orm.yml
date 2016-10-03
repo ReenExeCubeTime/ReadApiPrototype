@@ -1,6 +1,7 @@
 FS\AppBundle\Entity\UserStoryFavorite:
     type: entity
     table: fs_user_story_favorite
+    repositoryClass: FS\AppBundle\Repository\UserStoryFavoriteRepository
 
     id:
         id:
