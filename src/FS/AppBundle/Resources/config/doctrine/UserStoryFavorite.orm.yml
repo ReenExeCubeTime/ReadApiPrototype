@@ -35,6 +35,3 @@ FS\AppBundle\Entity\UserStoryFavorite:
         created:
             type: datetime
             nullable: false
-        updated:
-            type: datetime
-            nullable: false

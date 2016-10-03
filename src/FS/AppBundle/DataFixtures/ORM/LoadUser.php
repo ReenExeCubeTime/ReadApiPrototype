@@ -14,18 +14,20 @@ class LoadUser extends AbstractFixture implements OrderedFixtureInterface
         $now = new \DateTime();
 
         $userNameList = [
-            'Alex',
-            'Vertys',
-            'Reen',
+            'user-alex' => 'Alex',
+            'user-vertys' => 'Vertys',
+            'user-reen' => 'Reen',
         ];
 
-        foreach ($userNameList as $userName) {
+        foreach ($userNameList as $reference => $userName) {
             $user = new User();
 
             $user
                 ->setName($userName)
                 ->setCreated($now)
                 ->setUpdated($now);
+
+            $this->addReference($reference, $user);
 
             $manager->persist($user);
         }

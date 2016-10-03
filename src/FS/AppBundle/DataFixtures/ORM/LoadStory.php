@@ -17,12 +17,12 @@ class LoadStory extends AbstractFixture implements OrderedFixtureInterface
         $language = $this->getReference('language-ukrainian');
 
         $stories = [
-            'Good morning Story',
-            'Memory Story',
-            'Try Story',
+            'story-morning' => 'Good morning Story',
+            'story-memory' => 'Memory Story',
+            'story-try' => 'Try Story',
         ];
 
-        foreach ($stories as $text) {
+        foreach ($stories as $reference => $text) {
             $story = new Story();
 
             $story
@@ -32,6 +32,8 @@ class LoadStory extends AbstractFixture implements OrderedFixtureInterface
                 ->setStatus(1)
                 ->setCreated($now)
                 ->setUpdated($now);
+
+            $this->addReference($reference, $story);
 
             $manager->persist($story);
         }

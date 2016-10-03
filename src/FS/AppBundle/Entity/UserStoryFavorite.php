@@ -23,11 +23,6 @@ class UserStoryFavorite
     private $created;
 
     /**
-     * @var \DateTime
-     */
-    private $updated;
-
-    /**
      * @var \FS\AppBundle\Entity\User
      */
     private $user;
@@ -94,30 +89,6 @@ class UserStoryFavorite
     public function getCreated()
     {
         return $this->created;
-    }
-
-    /**
-     * Set updated
-     *
-     * @param \DateTime $updated
-     *
-     * @return UserStoryFavorite
-     */
-    public function setUpdated($updated)
-    {
-        $this->updated = $updated;
-
-        return $this;
-    }
-
-    /**
-     * Get updated
-     *
-     * @return \DateTime
-     */
-    public function getUpdated()
-    {
-        return $this->updated;
     }
 
     /**

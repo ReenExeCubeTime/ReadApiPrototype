@@ -11,6 +11,32 @@ class LoadUserStoryFavorite extends AbstractFixture implements OrderedFixtureInt
 {
     public function load(ObjectManager $manager)
     {
+        $now = new \DateTime();
+
+        $relations = [
+            'story-morning' => ['user-alex', 'user-vertys', 'user-reen'],
+            'story-memory' => ['user-vertys'],
+            'story-try' => [],
+        ];
+
+        foreach ($relations as $storyReference => $userReferences) {
+            $story = $this->getReference($storyReference);
+
+            foreach ($userReferences as $userReference) {
+                $user = $this->getReference($userReference);
+
+                $userStoryFavorite = new UserStoryFavorite();
+
+                $userStoryFavorite
+                    ->setStory($story)
+                    ->setUser($user)
+                    ->setCreated($now);
+
+                $manager->persist($userStoryFavorite);
+            }
+        }
+
+        $manager->flush();
     }
 
     public function getOrder()
