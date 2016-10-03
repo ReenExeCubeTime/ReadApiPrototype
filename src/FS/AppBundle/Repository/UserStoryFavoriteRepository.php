@@ -10,4 +10,18 @@ namespace FS\AppBundle\Repository;
  */
 class UserStoryFavoriteRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getStoryTotalMap(array $stories)
+    {
+        return $this
+            ->createQueryBuilder('usf')
+            ->select('usf.storyId, COUNT(usf.id) AS total')
+            ->where('usf.storyId IN (:stories)')
+            ->setParameters([
+                'stories' => $stories,
+            ])
+            ->addGroupBy('usf.storyId')
+            ->getQuery()
+            ->getArrayResult();
+
+    }
 }

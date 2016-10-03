@@ -22,19 +22,35 @@ class StoryDataProvider
 
     public function getList()
     {
-        $list = $this
+        $source = $this
             ->doctrine
             ->getRepository('FSAppBundle:Story')
             ->getList();
 
         $result = [];
 
-        foreach ($list as $item) {
+        $storyIdList = array_column($source, 'id');
+
+        $favoriteStorySourceMap = $this
+            ->doctrine
+            ->getRepository('FSAppBundle:UserStoryFavorite')
+            ->getStoryTotalMap($storyIdList);
+
+        $favoriteStoryMap = array_column($favoriteStorySourceMap, null, 'storyId');
+
+        foreach ($source as $item) {
+            $storyId = $item['id'];
+
             $result[] = [
-                'id' => $item['id'],
+                'id' => $storyId,
                 'text' => $item['text'],
                 'category' => [
                     'name' => $item['name'],
+                ],
+                'favorite' => [
+                    'total' => isset($favoriteStoryMap[$storyId])
+                        ? $favoriteStoryMap[$storyId]['total']
+                        : 0,
                 ],
             ];
         }

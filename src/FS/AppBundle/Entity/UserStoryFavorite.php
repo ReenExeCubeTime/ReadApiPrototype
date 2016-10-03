@@ -109,5 +109,62 @@ class UserStoryFavorite
     {
         return $this->story;
     }
-}
+    /**
+     * @var integer
+     */
+    private $userId;
 
+    /**
+     * @var integer
+     */
+    private $storyId;
+
+
+    /**
+     * Set userId
+     *
+     * @param integer $userId
+     *
+     * @return UserStoryFavorite
+     */
+    public function setUserId($userId)
+    {
+        $this->userId = $userId;
+
+        return $this;
+    }
+
+    /**
+     * Get userId
+     *
+     * @return integer
+     */
+    public function getUserId()
+    {
+        return $this->userId;
+    }
+
+    /**
+     * Set storyId
+     *
+     * @param integer $storyId
+     *
+     * @return UserStoryFavorite
+     */
+    public function setStoryId($storyId)
+    {
+        $this->storyId = $storyId;
+
+        return $this;
+    }
+
+    /**
+     * Get storyId
+     *
+     * @return integer
+     */
+    public function getStoryId()
+    {
+        return $this->storyId;
+    }
+}
