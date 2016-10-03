@@ -27,11 +27,6 @@ FS\AppBundle\Entity\UserStoryFavorite:
                 referencedColumnName: id
 
     fields:
-        name:
-            type: text
-            nullable: false
-            length: 255
-            fixed: false
         created:
             type: datetime
             nullable: false

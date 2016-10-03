@@ -13,11 +13,6 @@ class UserStoryFavorite
     private $id;
 
     /**
-     * @var string
-     */
-    private $name;
-
-    /**
      * @var \DateTime
      */
     private $created;
@@ -41,30 +36,6 @@ class UserStoryFavorite
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return UserStoryFavorite
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 
     /**
