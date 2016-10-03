@@ -1,0 +1,40 @@
+FS\AppBundle\Entity\UserStoryFavorite:
+    type: entity
+    table: fs_user_story_favorite
+
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+
+    manyToOne:
+        user:
+            targetEntity: FS\AppBundle\Entity\User
+            fetch: EXTRA_LAZY
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+
+        story:
+            targetEntity: FS\AppBundle\Entity\Story
+            fetch: EXTRA_LAZY
+            joinColumn:
+                name: story_id
+                referencedColumnName: id
+
+    fields:
+        name:
+            type: text
+            nullable: false
+            length: 255
+            fixed: false
+        created:
+            type: datetime
+            nullable: false
+        updated:
+            type: datetime
+            nullable: false
