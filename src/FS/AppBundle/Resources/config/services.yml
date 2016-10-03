@@ -3,3 +3,8 @@ services:
         class: 'FS\AppBundle\Service\CategoryDataProvider'
         arguments:
             - '@doctrine'
+
+    fs.stoty.data.provider:
+        class: 'FS\AppBundle\Service\StoryDataProvider'
+        arguments:
+            - '@doctrine'

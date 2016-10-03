@@ -16,10 +16,7 @@ class ApiStoryController extends AbstractApiController
      */
     public function listAction()
     {
-        $stories = $this
-            ->getDoctrine()
-            ->getRepository('FSAppBundle:Story')
-            ->getList();
+        $stories = $this->get('fs.stoty.data.provider')->getList();
 
         return $this->createSuccess($stories);
     }
