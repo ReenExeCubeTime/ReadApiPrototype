@@ -11,22 +11,31 @@ class LoadStory extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $story = new Story();
-
         $now = new \DateTime();
 
         $category = $this->getReference('category-history');
         $language = $this->getReference('language-ukrainian');
 
-        $story
-            ->setText('First Story')
-            ->setCategory($category)
-            ->setLanguage($language)
-            ->setStatus(1)
-            ->setCreated($now)
-            ->setUpdated($now);
+        $stories = [
+            'Good morning Story',
+            'Memory Story',
+            'Try Story',
+        ];
 
-        $manager->persist($story);
+        foreach ($stories as $text) {
+            $story = new Story();
+
+            $story
+                ->setText($text)
+                ->setCategory($category)
+                ->setLanguage($language)
+                ->setStatus(1)
+                ->setCreated($now)
+                ->setUpdated($now);
+
+            $manager->persist($story);
+        }
+
         $manager->flush();
     }
 

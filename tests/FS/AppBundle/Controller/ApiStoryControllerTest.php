@@ -15,11 +15,25 @@ class ApiStoryControllerTest extends AbstractApiControllerTest
             [
                 [
                     'id' => 1,
-                    'text' => 'First Story',
+                    'text' => 'Good morning Story',
                     'category' => [
                         'name' => 'History',
                     ],
-                ]
+                ],
+                [
+                    'id' => 2,
+                    'text' => 'Memory Story',
+                    'category' => [
+                        'name' => 'History',
+                    ],
+                ],
+                [
+                    'id' => 3,
+                    'text' => 'Try Story',
+                    'category' => [
+                        'name' => 'History',
+                    ],
+                ],
             ],
             $client
         );
