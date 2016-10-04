@@ -16,7 +16,11 @@ class ApiStoryController extends AbstractApiController
      */
     public function listAction()
     {
-        $stories = $this->get('fs.stoty.data.provider')->getList();
+        $user = $this->getUser();
+
+        $stories = $this
+            ->get('fs.stoty.data.provider')
+            ->getList($user);
 
         return $this->createSuccess($stories);
     }

@@ -21,6 +21,7 @@ class ApiStoryControllerTest extends AbstractApiControllerTest
                     ],
                     'favorite' => [
                         'total' => 3,
+                        'in' => true,
                     ],
                 ],
                 [
@@ -31,6 +32,7 @@ class ApiStoryControllerTest extends AbstractApiControllerTest
                     ],
                     'favorite' => [
                         'total' => 1,
+                        'in' => false,
                     ],
                 ],
                 [
@@ -41,6 +43,7 @@ class ApiStoryControllerTest extends AbstractApiControllerTest
                     ],
                     'favorite' => [
                         'total' => 0,
+                        'in' => false,
                     ],
                 ],
             ],

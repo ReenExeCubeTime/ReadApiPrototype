@@ -2,6 +2,8 @@
 
 namespace FS\AppBundle\Repository;
 
+use FS\AppBundle\Entity\User;
+
 /**
  * UserStoryFavoriteRepository
  *
@@ -10,7 +12,7 @@ namespace FS\AppBundle\Repository;
  */
 class UserStoryFavoriteRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function getStoryTotalMap(array $stories)
+    public function getTotalMap(array $stories)
     {
         return $this
             ->createQueryBuilder('usf')
@@ -22,6 +24,23 @@ class UserStoryFavoriteRepository extends \Doctrine\ORM\EntityRepository
             ->addGroupBy('usf.storyId')
             ->getQuery()
             ->getArrayResult();
+    }
 
+    public function inFaveList(User $user, array $stories)
+    {
+        return $this
+            ->createQueryBuilder('usf')
+            ->select('usf.storyId')
+            ->where(
+                'usf.storyId IN (:stories)',
+                'usf.user = :user'
+            )
+            ->setParameters([
+                'stories' => $stories,
+                'user' => $user,
+            ])
+            ->addGroupBy('usf.storyId')
+            ->getQuery()
+            ->getArrayResult();
     }
 }

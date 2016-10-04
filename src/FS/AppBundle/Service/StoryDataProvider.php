@@ -3,6 +3,7 @@
 namespace FS\AppBundle\Service;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
+use FS\AppBundle\Entity\User;
 
 class StoryDataProvider
 {
@@ -20,7 +21,7 @@ class StoryDataProvider
         $this->doctrine = $doctrine;
     }
 
-    public function getList()
+    public function getList(User $user)
     {
         $source = $this
             ->doctrine
@@ -34,9 +35,16 @@ class StoryDataProvider
         $favoriteStorySourceMap = $this
             ->doctrine
             ->getRepository('FSAppBundle:UserStoryFavorite')
-            ->getStoryTotalMap($storyIdList);
+            ->getTotalMap($storyIdList);
 
-        $favoriteStoryMap = array_column($favoriteStorySourceMap, null, 'storyId');
+        $favoriteStoryMap = array_column($favoriteStorySourceMap, 'total', 'storyId');
+
+        $inFaveList = $this
+            ->doctrine
+            ->getRepository('FSAppBundle:UserStoryFavorite')
+            ->inFaveList($user, $storyIdList);
+
+        $inFaveMap = array_flip(array_column($inFaveList, 'storyId'));
 
         foreach ($source as $item) {
             $storyId = $item['id'];
@@ -49,8 +57,9 @@ class StoryDataProvider
                 ],
                 'favorite' => [
                     'total' => isset($favoriteStoryMap[$storyId])
-                        ? $favoriteStoryMap[$storyId]['total']
+                        ? $favoriteStoryMap[$storyId]
                         : 0,
+                    'in' => isset($inFaveMap[$storyId]),
                 ],
             ];
         }
