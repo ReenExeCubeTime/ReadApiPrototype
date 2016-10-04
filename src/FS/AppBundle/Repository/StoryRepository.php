@@ -10,13 +10,15 @@ namespace FS\AppBundle\Repository;
  */
 class StoryRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function getList()
+    public function getList(\DateTime $now)
     {
         return $this
             ->createQueryBuilder('s')
             ->select('s.id, s.text, c.name, l.code')
             ->join('s.category', 'c')
             ->join('s.language', 'l')
+            ->where('s.begin < :now')
+            ->setParameter('now', $now)
             ->getQuery()
             ->getArrayResult();
     }

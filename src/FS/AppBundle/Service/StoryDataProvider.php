@@ -26,7 +26,7 @@ class StoryDataProvider
         $source = $this
             ->doctrine
             ->getRepository('FSAppBundle:Story')
-            ->getList();
+            ->getList(new \DateTime());
 
         $result = [];
 
