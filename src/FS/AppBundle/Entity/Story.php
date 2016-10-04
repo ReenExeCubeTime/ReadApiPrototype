@@ -196,5 +196,33 @@ class Story
     {
         return $this->language;
     }
-}
+    /**
+     * @var \DateTime
+     */
+    private $begin;
 
+
+    /**
+     * Set begin
+     *
+     * @param \DateTime $begin
+     *
+     * @return Story
+     */
+    public function setBegin($begin)
+    {
+        $this->begin = $begin;
+
+        return $this;
+    }
+
+    /**
+     * Get begin
+     *
+     * @return \DateTime
+     */
+    public function getBegin()
+    {
+        return $this->begin;
+    }
+}

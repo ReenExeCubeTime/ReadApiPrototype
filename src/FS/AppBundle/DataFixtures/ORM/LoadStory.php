@@ -11,7 +11,7 @@ class LoadStory extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $now = new \DateTime();
+        $now = new \DateTimeImmutable();
 
         $category = $this->getReference('category-history');
         $language = $this->getReference('language-ukrainian');
@@ -30,6 +30,7 @@ class LoadStory extends AbstractFixture implements OrderedFixtureInterface
                 ->setCategory($category)
                 ->setLanguage($language)
                 ->setStatus(1)
+                ->setBegin($now)
                 ->setCreated($now)
                 ->setUpdated($now);
 
@@ -37,6 +38,19 @@ class LoadStory extends AbstractFixture implements OrderedFixtureInterface
 
             $manager->persist($story);
         }
+
+        $story = new Story();
+
+        $story
+            ->setText('Future Story')
+            ->setCategory($category)
+            ->setLanguage($language)
+            ->setStatus(1)
+            ->setBegin($now->add('1 hour'))
+            ->setCreated($now)
+            ->setUpdated($now);
+
+        $manager->persist($story);
 
         $manager->flush();
     }

@@ -36,6 +36,9 @@ FS\AppBundle\Entity\Story:
             type: integer
             nullable: false
             unsigned: true
+        begin:
+            type: datetime
+            nullable: false
         created:
             type: datetime
             nullable: false
