@@ -14,7 +14,7 @@ class StoryRepository extends \Doctrine\ORM\EntityRepository
     {
         return $this
             ->createQueryBuilder('s')
-            ->select('s.id, s.text, c.name, l.code')
+            ->select('s.id, s.text, c.name, l.code, s.begin')
             ->join('s.category', 'c')
             ->join('s.language', 'l')
             ->where('s.begin < :now')
