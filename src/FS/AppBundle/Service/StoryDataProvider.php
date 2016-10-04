@@ -55,6 +55,9 @@ class StoryDataProvider
                 'category' => [
                     'name' => $item['name'],
                 ],
+                'language' => [
+                    'code' => $item['code'],
+                ],
                 'favorite' => [
                     'total' => isset($favoriteStoryMap[$storyId])
                         ? $favoriteStoryMap[$storyId]

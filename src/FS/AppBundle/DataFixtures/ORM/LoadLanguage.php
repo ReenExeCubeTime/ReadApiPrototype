@@ -11,19 +11,23 @@ class LoadLanguage extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $category = new Language();
+        $language = new Language();
 
         $now = new \DateTime();
 
-        $category
+        /**
+         * https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
+         */
+        $language
             ->setName('Ukrainian')
+            ->setCode('uk')
             ->setCreated($now)
             ->setUpdated($now);
 
-        $manager->persist($category);
+        $manager->persist($language);
         $manager->flush();
 
-        $this->addReference('language-ukrainian', $category);
+        $this->addReference('language-ukrainian', $language);
     }
 
     public function getOrder()
