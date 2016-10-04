@@ -3,6 +3,12 @@ FS\AppBundle\Entity\UserStoryFavorite:
     table: fs_user_story_favorite
     repositoryClass: FS\AppBundle\Repository\UserStoryFavoriteRepository
 
+    uniqueConstraints:
+        USER_STORY_UNIQUE:
+            columns:
+                - user_id
+                - story_id
+
     id:
         id:
             type: integer
