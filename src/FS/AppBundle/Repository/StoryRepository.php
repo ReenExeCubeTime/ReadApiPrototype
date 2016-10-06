@@ -10,7 +10,7 @@ namespace FS\AppBundle\Repository;
  */
 class StoryRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function getList(\DateTime $now)
+    public function getList(\DateTimeInterface $now, $offset, $limit)
     {
         return $this
             ->createQueryBuilder('s')
@@ -19,7 +19,20 @@ class StoryRepository extends \Doctrine\ORM\EntityRepository
             ->join('s.language', 'l')
             ->where('s.begin < :now')
             ->setParameter('now', $now)
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
             ->getQuery()
             ->getArrayResult();
+    }
+
+    public function getCount(\DateTimeInterface $now)
+    {
+        return (int)$this
+            ->createQueryBuilder('s')
+            ->select('COUNT(s)')
+            ->where('s.begin < :now')
+            ->setParameter('now', $now)
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 }

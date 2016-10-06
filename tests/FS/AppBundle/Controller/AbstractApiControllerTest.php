@@ -23,4 +23,16 @@ abstract class AbstractApiControllerTest extends WebTestCase
             json_decode($client->getResponse()->getContent(), true)
         );
     }
+
+    protected function expectSuccessList(array $expect, array $paging, Client $client)
+    {
+        $this->assertEquals(
+            [
+                'paging' => $paging,
+                'data' => $expect,
+                'success' => true,
+            ],
+            json_decode($client->getResponse()->getContent(), true)
+        );
+    }
 }

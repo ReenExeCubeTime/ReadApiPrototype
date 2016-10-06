@@ -11,7 +11,7 @@ class ApiStoryControllerTest extends AbstractApiControllerTest
         $client->request('GET', '/api/stories.json');
 
         $this->expectSuccessStatus($client);
-        $this->expectSuccess(
+        $this->expectSuccessList(
             [
                 [
                     'id' => 1,
@@ -83,6 +83,12 @@ class ApiStoryControllerTest extends AbstractApiControllerTest
                         'in' => false,
                     ],
                 ],
+            ],
+            [
+                'page' => 1,
+                'pages' => 1,
+                'limit' => 10,
+                'total' => 5,
             ],
             $client
         );

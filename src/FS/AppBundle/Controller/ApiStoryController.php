@@ -4,24 +4,43 @@ namespace FS\AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Symfony\Component\HttpFoundation\Request;
 
 class ApiStoryController extends AbstractApiController
 {
     /**
      * @ApiDoc(
      *      section="story",
-     *      description="Stories"
+     *      description="Stories",
+     *      parameters={
+     *          {
+     *              "name"="page",
+     *              "required"=false,
+     *              "dataType"="integer",
+     *              "description"="pagination default page is one",
+     *          },
+     *          {
+     *              "name"="limit",
+     *              "required"=false,
+     *              "dataType"="integer",
+     *              "description"="pagination default limit is ten",
+     *          },
+     *      },
      * )
+     * @param Request $request
      * @return JsonResponse
      */
-    public function listAction()
+    public function listAction(Request $request)
     {
         $user = $this->getUser();
 
-        $stories = $this
-            ->get('fs.stoty.data.provider')
-            ->getList($user);
+        $page = $request->query->get('page', 1);
+        $limit = $request->query->get('limit', 10);
 
-        return $this->createSuccess($stories);
+        $listContainer = $this
+            ->get('fs.stoty.data.provider')
+            ->getListContainer($page, $limit, $user);
+
+        return $this->createSuccessListContainer($listContainer);
     }
 }

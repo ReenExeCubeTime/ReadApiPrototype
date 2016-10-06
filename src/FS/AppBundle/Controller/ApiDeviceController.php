@@ -16,8 +16,8 @@ class ApiDeviceController extends AbstractApiController
      *              "name"="_format",
      *              "dataType"="string",
      *              "description"="response format, default json",
-     *          }
-     *      }
+     *          },
+     *      },
      * )
      * @return JsonResponse
      */

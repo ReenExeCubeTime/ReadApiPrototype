@@ -3,7 +3,10 @@
 namespace FS\AppBundle\Service;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
+use FS\AppBundle\Component\ApiListContainer;
+use FS\AppBundle\Component\Pager\StoryAdapter;
 use FS\AppBundle\Entity\User;
+use Pagerfanta\Pagerfanta;
 
 class StoryDataProvider
 {
@@ -21,12 +24,23 @@ class StoryDataProvider
         $this->doctrine = $doctrine;
     }
 
-    public function getList(User $user = null)
+    /**
+     * @param $page
+     * @param $limit
+     * @param User|null $user
+     * @return ApiListContainer
+     */
+    public function getListContainer($page, $limit, User $user = null)
     {
-        $source = $this
+        $repository = $this
             ->doctrine
-            ->getRepository('FSAppBundle:Story')
-            ->getList(new \DateTime());
+            ->getRepository('FSAppBundle:Story');
+
+        $pager = new Pagerfanta(
+            new StoryAdapter($repository, new \DateTime())
+        );
+
+        $source = $pager->getCurrentPageResults();
 
         $result = [];
 
@@ -64,7 +78,7 @@ class StoryDataProvider
             ];
         }
 
-        return $result;
+        return new ApiListContainer($result, $pager);
     }
 
     private function getInFaveMap(User $user, $storyIdList)
