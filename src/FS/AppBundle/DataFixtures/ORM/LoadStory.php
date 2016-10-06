@@ -20,6 +20,8 @@ class LoadStory extends AbstractFixture implements OrderedFixtureInterface
             'story-morning' => 'Good morning Story',
             'story-memory' => 'Memory Story',
             'story-try' => 'Try Story',
+            'story-funny' => 'Funny',
+            'story-little' => 'Little',
         ];
 
         foreach ($stories as $reference => $text) {

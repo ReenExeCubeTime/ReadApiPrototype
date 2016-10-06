@@ -21,7 +21,7 @@ class StoryDataProvider
         $this->doctrine = $doctrine;
     }
 
-    public function getList(User $user)
+    public function getList(User $user = null)
     {
         $source = $this
             ->doctrine
@@ -39,12 +39,9 @@ class StoryDataProvider
 
         $favoriteStoryMap = array_column($favoriteStorySourceMap, 'total', 'storyId');
 
-        $inFaveList = $this
-            ->doctrine
-            ->getRepository('FSAppBundle:UserStoryFavorite')
-            ->inFaveList($user, $storyIdList);
-
-        $inFaveMap = array_flip(array_column($inFaveList, 'storyId'));
+        $inFaveMap = $user
+            ? $this->getInFaveMap($user, $storyIdList)
+            : [];
 
         foreach ($source as $item) {
             $storyId = $item['id'];
@@ -68,5 +65,15 @@ class StoryDataProvider
         }
 
         return $result;
+    }
+
+    private function getInFaveMap(User $user, $storyIdList)
+    {
+        $inFaveList = $this
+            ->doctrine
+            ->getRepository('FSAppBundle:UserStoryFavorite')
+            ->inFaveList($user, $storyIdList);
+
+        return array_flip(array_column($inFaveList, 'storyId'));
     }
 }

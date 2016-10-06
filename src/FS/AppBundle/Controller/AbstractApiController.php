@@ -14,15 +14,4 @@ abstract class AbstractApiController extends Controller
             'success' => true,
         ]);
     }
-
-    /**
-     * @return \FS\AppBundle\Entity\User|null
-     */
-    protected function getUser()
-    {
-        return $this
-            ->get('doctrine')
-            ->getRepository('FSAppBundle:User')
-            ->find(1);
-    }
 }

@@ -24,7 +24,7 @@ class ApiStoryControllerTest extends AbstractApiControllerTest
                     ],
                     'favorite' => [
                         'total' => 3,
-                        'in' => true,
+                        'in' => false,
                     ],
                 ],
                 [
@@ -44,6 +44,34 @@ class ApiStoryControllerTest extends AbstractApiControllerTest
                 [
                     'id' => 3,
                     'text' => 'Try Story',
+                    'category' => [
+                        'name' => 'History',
+                    ],
+                    'language' => [
+                        'code' => 'uk',
+                    ],
+                    'favorite' => [
+                        'total' => 0,
+                        'in' => false,
+                    ],
+                ],
+                [
+                    'id' => 4,
+                    'text' => 'Funny',
+                    'category' => [
+                        'name' => 'History',
+                    ],
+                    'language' => [
+                        'code' => 'uk',
+                    ],
+                    'favorite' => [
+                        'total' => 0,
+                        'in' => false,
+                    ],
+                ],
+                [
+                    'id' => 5,
+                    'text' => 'Little',
                     'category' => [
                         'name' => 'History',
                     ],
