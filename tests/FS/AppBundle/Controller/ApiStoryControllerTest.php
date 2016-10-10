@@ -169,5 +169,51 @@ class ApiStoryControllerTest extends AbstractApiControllerTest
                 'total' => 5,
             ],
         ];
+
+        $one['favorite']['in'] = true;
+        $two['favorite']['in'] = false;
+        $three['favorite']['in'] = false;
+
+        yield [
+            [
+                'page' => 1,
+                'limit' => 3,
+                'token' => 1,
+            ],
+            [
+                $one,
+                $two,
+                $three,
+            ],
+            [
+                'page' => 1,
+                'pages' => 2,
+                'limit' => 3,
+                'total' => 5,
+            ],
+        ];
+
+        $one['favorite']['in'] = true;
+        $two['favorite']['in'] = true;
+        $three['favorite']['in'] = false;
+
+        yield [
+            [
+                'page' => 1,
+                'limit' => 3,
+                'token' => 2,
+            ],
+            [
+                $one,
+                $two,
+                $three,
+            ],
+            [
+                'page' => 1,
+                'pages' => 2,
+                'limit' => 3,
+                'total' => 5,
+            ],
+        ];
     }
 }
