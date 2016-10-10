@@ -41,8 +41,8 @@ class StoryDataProvider
         );
 
         $pager
-            ->setCurrentPage($page)
-            ->setMaxPerPage($limit);
+            ->setMaxPerPage($limit)
+            ->setCurrentPage($page);
 
         $source = $pager->getCurrentPageResults();
 

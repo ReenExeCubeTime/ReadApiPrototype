@@ -26,143 +26,148 @@ class ApiStoryControllerTest extends AbstractApiControllerTest
 
     public function dataProvider()
     {
-        return [
+        $one = [
+            'id' => 1,
+            'text' => 'Good morning Story',
+            'category' => [
+                'name' => 'History',
+            ],
+            'language' => [
+                'code' => 'uk',
+            ],
+            'favorite' => [
+                'total' => 3,
+                'in' => false,
+            ],
+        ];
+
+        $two = [
+            'id' => 2,
+            'text' => 'Memory Story',
+            'category' => [
+                'name' => 'History',
+            ],
+            'language' => [
+                'code' => 'uk',
+            ],
+            'favorite' => [
+                'total' => 1,
+                'in' => false,
+            ],
+        ];
+
+        $three = [
+            'id' => 3,
+            'text' => 'Try Story',
+            'category' => [
+                'name' => 'History',
+            ],
+            'language' => [
+                'code' => 'uk',
+            ],
+            'favorite' => [
+                'total' => 0,
+                'in' => false,
+            ],
+        ];
+
+        $four = [
+            'id' => 4,
+            'text' => 'Funny',
+            'category' => [
+                'name' => 'History',
+            ],
+            'language' => [
+                'code' => 'uk',
+            ],
+            'favorite' => [
+                'total' => 0,
+                'in' => false,
+            ],
+        ];
+
+        $five = [
+            'id' => 5,
+            'text' => 'Little',
+            'category' => [
+                'name' => 'History',
+            ],
+            'language' => [
+                'code' => 'uk',
+            ],
+            'favorite' => [
+                'total' => 0,
+                'in' => false,
+            ],
+        ];
+
+        yield [
+            [],
             [
-                [],
-                [
-                    [
-                        'id' => 1,
-                        'text' => 'Good morning Story',
-                        'category' => [
-                            'name' => 'History',
-                        ],
-                        'language' => [
-                            'code' => 'uk',
-                        ],
-                        'favorite' => [
-                            'total' => 3,
-                            'in' => false,
-                        ],
-                    ],
-                    [
-                        'id' => 2,
-                        'text' => 'Memory Story',
-                        'category' => [
-                            'name' => 'History',
-                        ],
-                        'language' => [
-                            'code' => 'uk',
-                        ],
-                        'favorite' => [
-                            'total' => 1,
-                            'in' => false,
-                        ],
-                    ],
-                    [
-                        'id' => 3,
-                        'text' => 'Try Story',
-                        'category' => [
-                            'name' => 'History',
-                        ],
-                        'language' => [
-                            'code' => 'uk',
-                        ],
-                        'favorite' => [
-                            'total' => 0,
-                            'in' => false,
-                        ],
-                    ],
-                    [
-                        'id' => 4,
-                        'text' => 'Funny',
-                        'category' => [
-                            'name' => 'History',
-                        ],
-                        'language' => [
-                            'code' => 'uk',
-                        ],
-                        'favorite' => [
-                            'total' => 0,
-                            'in' => false,
-                        ],
-                    ],
-                    [
-                        'id' => 5,
-                        'text' => 'Little',
-                        'category' => [
-                            'name' => 'History',
-                        ],
-                        'language' => [
-                            'code' => 'uk',
-                        ],
-                        'favorite' => [
-                            'total' => 0,
-                            'in' => false,
-                        ],
-                    ],
-                ],
-                [
-                    'page' => 1,
-                    'pages' => 1,
-                    'limit' => 10,
-                    'total' => 5,
-                ],
+                $one,
+                $two,
+                $three,
+                $four,
+                $five,
             ],
             [
-                [
-                    'limit' => 3,
-                ],
-                [
-                    [
-                        'id' => 1,
-                        'text' => 'Good morning Story',
-                        'category' => [
-                            'name' => 'History',
-                        ],
-                        'language' => [
-                            'code' => 'uk',
-                        ],
-                        'favorite' => [
-                            'total' => 3,
-                            'in' => false,
-                        ],
-                    ],
-                    [
-                        'id' => 2,
-                        'text' => 'Memory Story',
-                        'category' => [
-                            'name' => 'History',
-                        ],
-                        'language' => [
-                            'code' => 'uk',
-                        ],
-                        'favorite' => [
-                            'total' => 1,
-                            'in' => false,
-                        ],
-                    ],
-                    [
-                        'id' => 3,
-                        'text' => 'Try Story',
-                        'category' => [
-                            'name' => 'History',
-                        ],
-                        'language' => [
-                            'code' => 'uk',
-                        ],
-                        'favorite' => [
-                            'total' => 0,
-                            'in' => false,
-                        ],
-                    ],
-                ],
-                [
-                    'page' => 1,
-                    'pages' => 2,
-                    'limit' => 3,
-                    'total' => 5,
-                ],
-            ]
+                'page' => 1,
+                'pages' => 1,
+                'limit' => 10,
+                'total' => 5,
+            ],
+        ];
+
+        yield [
+            [
+                'limit' => 3,
+            ],
+            [
+                $one,
+                $two,
+                $three,
+            ],
+            [
+                'page' => 1,
+                'pages' => 2,
+                'limit' => 3,
+                'total' => 5,
+            ],
+        ];
+
+        yield [
+            [
+                'page' => 1,
+                'limit' => 3,
+            ],
+            [
+                $one,
+                $two,
+                $three,
+            ],
+            [
+                'page' => 1,
+                'pages' => 2,
+                'limit' => 3,
+                'total' => 5,
+            ],
+        ];
+
+        yield [
+            [
+                'page' => 2,
+                'limit' => 3,
+            ],
+            [
+                $four,
+                $five,
+            ],
+            [
+                'page' => 2,
+                'pages' => 2,
+                'limit' => 3,
+                'total' => 5,
+            ],
         ];
     }
 }
