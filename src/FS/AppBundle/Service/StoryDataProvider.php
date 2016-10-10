@@ -40,6 +40,10 @@ class StoryDataProvider
             new StoryAdapter($repository, new \DateTime())
         );
 
+        $pager
+            ->setCurrentPage($page)
+            ->setMaxPerPage($limit);
+
         $source = $pager->getCurrentPageResults();
 
         $result = [];
