@@ -2,15 +2,14 @@
 
 namespace Tests\FS\AppBundle\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\BrowserKit\Client;
-use Symfony\Component\HttpFoundation\Response;
 
 abstract class AbstractApiControllerTest extends WebTestCase
 {
     protected function expectSuccessStatus(Client $client)
     {
-        $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
+        $this->assertTrue($client->getResponse()->isOk());
     }
 
     protected function expectSuccess(array $expect, Client $client)
