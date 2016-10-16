@@ -2,6 +2,8 @@
 
 namespace Tests\FS\AppBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Response;
+
 class ApiStoryControllerTest extends AbstractApiControllerTest
 {
     /**
@@ -215,5 +217,17 @@ class ApiStoryControllerTest extends AbstractApiControllerTest
                 'total' => 5,
             ],
         ];
+    }
+
+    public function testAnonymousLike()
+    {
+        $client = static::createClient();
+
+        $client->request('POST', '/api/story/1/like.json');
+
+        $this->assertSame(
+            Response::HTTP_BAD_REQUEST,
+            $client->getResponse()->getStatusCode()
+        );
     }
 }
