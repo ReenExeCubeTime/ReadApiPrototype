@@ -8,3 +8,8 @@ services:
         class: 'FS\AppBundle\Service\StoryDataProvider'
         arguments:
             - '@doctrine'
+
+    fs.auth.listener:
+        class: 'FS\AppBundle\Service\AuthListener'
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
