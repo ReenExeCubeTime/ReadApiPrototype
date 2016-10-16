@@ -28,50 +28,11 @@ class ApiStoryControllerTest extends AbstractApiControllerTest
 
     public function dataProvider()
     {
-        $one = [
-            'id' => 1,
-            'text' => 'Good morning Story',
-            'category' => [
-                'name' => 'History',
-            ],
-            'language' => [
-                'code' => 'uk',
-            ],
-            'favorite' => [
-                'total' => 3,
-                'in' => false,
-            ],
-        ];
+        $one = $this->getFirstStory();
 
-        $two = [
-            'id' => 2,
-            'text' => 'Memory Story',
-            'category' => [
-                'name' => 'History',
-            ],
-            'language' => [
-                'code' => 'uk',
-            ],
-            'favorite' => [
-                'total' => 1,
-                'in' => false,
-            ],
-        ];
+        $two = $this->getSecondStory();
 
-        $three = [
-            'id' => 3,
-            'text' => 'Try Story',
-            'category' => [
-                'name' => 'History',
-            ],
-            'language' => [
-                'code' => 'uk',
-            ],
-            'favorite' => [
-                'total' => 0,
-                'in' => false,
-            ],
-        ];
+        $three = $this->getThirdStory();
 
         $four = [
             'id' => 4,
@@ -235,11 +196,115 @@ class ApiStoryControllerTest extends AbstractApiControllerTest
     {
         $client = static::createClient();
 
+        $parameters = [
+            'token' => 3,
+            'page' => 1,
+            'limit' => 3,
+        ];
+
+        $paging = [
+            'page' => 1,
+            'pages' => 2,
+            'limit' => 3,
+            'total' => 5,
+        ];
+
+        $client->request('GET', '/api/stories.json', $parameters);
+
+        $this->expectSuccessList(
+            [
+                $this->getFirstStory(true),
+                $this->getSecondStory(),
+                $this->getThirdStory(),
+            ],
+            $paging,
+            $client
+        );
+
         $client->request('POST', '/api/story/3/like.json', [
             'token' => 3
         ]);
 
         $this->expectSuccessStatus($client);
         $this->expectSuccessAction($client);
+
+        $client->request('GET', '/api/stories.json', $parameters);
+
+        $this->expectSuccessList(
+            [
+                $this->getFirstStory(true),
+                $this->getSecondStory(),
+                $this->getThirdStory(true, 1),
+            ],
+            $paging,
+            $client
+        );
+    }
+
+    /**
+     * @param bool|false $in
+     * @return array
+     */
+    private function getFirstStory($in = false)
+    {
+        return [
+            'id' => 1,
+            'text' => 'Good morning Story',
+            'category' => [
+                'name' => 'History',
+            ],
+            'language' => [
+                'code' => 'uk',
+            ],
+            'favorite' => [
+                'total' => 3,
+                'in' => $in,
+            ],
+        ];
+    }
+
+    /**
+     * @param bool|false $in
+     * @return array
+     */
+    private function getSecondStory($in = false)
+    {
+        return [
+            'id' => 2,
+            'text' => 'Memory Story',
+            'category' => [
+                'name' => 'History',
+            ],
+            'language' => [
+                'code' => 'uk',
+            ],
+            'favorite' => [
+                'total' => 1,
+                'in' => $in,
+            ],
+        ];
+    }
+
+    /**
+     * @param bool|false $in
+     * @param int $total
+     * @return array
+     */
+    private function getThirdStory($in = false, $total = 0)
+    {
+        return [
+            'id' => 3,
+            'text' => 'Try Story',
+            'category' => [
+                'name' => 'History',
+            ],
+            'language' => [
+                'code' => 'uk',
+            ],
+            'favorite' => [
+                'total' => $total,
+                'in' => $in,
+            ],
+        ];
     }
 }
