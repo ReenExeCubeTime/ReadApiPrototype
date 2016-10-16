@@ -76,7 +76,7 @@ class StoryDataProvider
                 ],
                 'favorite' => [
                     'total' => isset($favoriteStoryMap[$storyId])
-                        ? $favoriteStoryMap[$storyId]
+                        ? (int)$favoriteStoryMap[$storyId]
                         : 0,
                     'in' => isset($inFaveMap[$storyId]),
                 ],

@@ -36,7 +36,7 @@ abstract class AbstractApiControllerTest extends WebTestCase
 
     protected function expectSuccessList(array $expect, array $paging, Client $client)
     {
-        $this->assertEquals(
+        $this->assertSame(
             [
                 'paging' => $paging,
                 'data' => $expect,
