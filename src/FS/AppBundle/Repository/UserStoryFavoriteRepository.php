@@ -2,6 +2,7 @@
 
 namespace FS\AppBundle\Repository;
 
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use FS\AppBundle\Entity\Story;
 use FS\AppBundle\Entity\User;
 use FS\AppBundle\Entity\UserStoryFavorite;
@@ -54,8 +55,14 @@ class UserStoryFavoriteRepository extends \Doctrine\ORM\EntityRepository
             ->setUser($user)
             ->setCreated(new \DateTime());
 
-        $this->getEntityManager()->persist($link);
-        $this->getEntityManager()->flush($link);
+        try {
+            $this->getEntityManager()->persist($link);
+            $this->getEntityManager()->flush($link);
+        } catch (UniqueConstraintViolationException $e) {
+            /**
+             * Double can logging
+             */
+        }
     }
 
     public function remove(Story $story, User $user)
