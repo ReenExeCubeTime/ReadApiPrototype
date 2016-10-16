@@ -35,7 +35,7 @@ class AuthListener
 
     public function onKernelRequest(KernelEvent $event)
     {
-        if ($userId = $event->getRequest()->query->get('token')) {
+        if ($userId = $event->getRequest()->get('token')) {
             $user = $this
                 ->doctrine
                 ->getRepository('FSAppBundle:User')
