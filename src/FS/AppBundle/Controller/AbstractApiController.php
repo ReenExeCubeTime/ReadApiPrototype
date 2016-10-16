@@ -3,6 +3,7 @@
 namespace FS\AppBundle\Controller;
 
 use FS\AppBundle\Component\ApiListContainer;
+use FS\AppBundle\Exception\ApiAuthenticationException;
 use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -10,6 +11,15 @@ use Symfony\Component\HttpFoundation\Response;
 
 abstract class AbstractApiController extends Controller
 {
+    protected function checkAndGetUser()
+    {
+        if ($user = $this->getUser()) {
+            return $user;
+        }
+
+        throw new ApiAuthenticationException();
+    }
+
     protected function createSuccess(array $data)
     {
         return new JsonResponse([

@@ -54,6 +54,8 @@ class ApiStoryController extends AbstractApiController
      */
     public function likeAction($id)
     {
+        $user = $this->checkAndGetUser();
+
         $story = $this->getStory($id);
 
         if (empty($story)) {
@@ -73,6 +75,8 @@ class ApiStoryController extends AbstractApiController
      */
     public function unlikeAction($id)
     {
+        $user = $this->checkAndGetUser();
+
         $story = $this->getStory($id);
 
         if (empty($story)) {

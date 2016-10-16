@@ -226,7 +226,7 @@ class ApiStoryControllerTest extends AbstractApiControllerTest
         $client->request('POST', '/api/story/1/like.json');
 
         $this->assertSame(
-            Response::HTTP_BAD_REQUEST,
+            Response::HTTP_UNAUTHORIZED,
             $client->getResponse()->getStatusCode()
         );
     }

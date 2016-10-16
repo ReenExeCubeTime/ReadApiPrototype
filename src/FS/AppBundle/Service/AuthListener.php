@@ -3,6 +3,10 @@
 namespace FS\AppBundle\Service;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
+use FS\AppBundle\Exception\ApiAuthenticationException;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\Event\KernelEvent;
 use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -42,6 +46,18 @@ class AuthListener
                     ->tokenStorage
                     ->setToken(new AnonymousToken('secret', $user));
             }
+        }
+    }
+
+    public function onKernelException(GetResponseForExceptionEvent $event)
+    {
+        if ($event->getException() instanceof ApiAuthenticationException) {
+            $event->setResponse(
+                new JsonResponse([
+                    'sucess' => false,
+                    'message' => 'Authentication is required',
+                ], Response::HTTP_UNAUTHORIZED)
+            );
         }
     }
 }
