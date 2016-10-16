@@ -228,6 +228,16 @@ class ApiStoryControllerTest extends AbstractApiControllerTest
         $this->expectSuccessStatus($client);
         $this->expectSuccessAction($client);
 
+        /**
+         * double try - expect success
+         */
+        $client->request('POST', '/api/story/3/like.json', [
+            'token' => 3
+        ]);
+
+        $this->expectSuccessStatus($client);
+        $this->expectSuccessAction($client);
+
         $client->request('GET', '/api/stories.json', $parameters);
 
         $this->expectSuccessList(
