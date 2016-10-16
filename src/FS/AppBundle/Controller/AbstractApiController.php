@@ -6,6 +6,7 @@ use FS\AppBundle\Component\ApiListContainer;
 use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 abstract class AbstractApiController extends Controller
 {
@@ -15,6 +16,21 @@ abstract class AbstractApiController extends Controller
             'data' => $data,
             'success' => true,
         ]);
+    }
+
+    protected function createSuccessAction()
+    {
+        return new JsonResponse([
+            'success' => true,
+        ]);
+    }
+
+    protected function createMessageError($message)
+    {
+        return new JsonResponse([
+            'message' => $message,
+            'success' => false,
+        ], Response::HTTP_BAD_REQUEST);
     }
 
     protected function createSuccessListContainer(ApiListContainer $container)

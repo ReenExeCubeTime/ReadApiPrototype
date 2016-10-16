@@ -49,12 +49,18 @@ class ApiStoryController extends AbstractApiController
      *      section="story",
      *      description="Like",
      * )
-     * @param Request $request
+     * @param $id
      * @return JsonResponse
      */
     public function likeAction($id)
     {
+        $story = $this->getStory($id);
 
+        if (empty($story)) {
+            return $this->createMessageError('Story missing');
+        }
+
+        return $this->createSuccessAction();
     }
 
     /**
@@ -62,11 +68,29 @@ class ApiStoryController extends AbstractApiController
      *      section="story",
      *      description="Unlike",
      * )
-     * @param Request $request
+     * @param $id
      * @return JsonResponse
      */
     public function unlikeAction($id)
     {
+        $story = $this->getStory($id);
 
+        if (empty($story)) {
+            return $this->createMessageError('Story missing');
+        }
+
+        return $this->createSuccessAction();
+    }
+
+    /**
+     * @param $id
+     * @return \FS\AppBundle\Entity\Story|null|object
+     */
+    private function getStory($id)
+    {
+        return $this
+            ->getDoctrine()
+            ->getRepository('FSAppBundle:Story')
+            ->find($id);
     }
 }
