@@ -66,7 +66,7 @@ class UserStoryFavoriteRepository extends \Doctrine\ORM\EntityRepository
         ]);
 
         if ($link) {
-            $this->getEntityManager()->detach($link);
+            $this->getEntityManager()->remove($link);
             $this->getEntityManager()->flush($link);
         }
     }

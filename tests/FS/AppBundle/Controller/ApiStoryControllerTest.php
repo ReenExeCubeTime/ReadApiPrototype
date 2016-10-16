@@ -239,6 +239,24 @@ class ApiStoryControllerTest extends AbstractApiControllerTest
             $paging,
             $client
         );
+
+        $client->request('POST', '/api/story/3/unlike.json', [
+            'token' => 3
+        ]);
+
+        $this->expectSuccessStatus($client);
+        $this->expectSuccessAction($client);
+
+        $client->request('GET', '/api/stories.json', $parameters);
+        $this->expectSuccessList(
+            [
+                $this->getFirstStory(true),
+                $this->getSecondStory(),
+                $this->getThirdStory(),
+            ],
+            $paging,
+            $client
+        );
     }
 
     /**
