@@ -230,4 +230,15 @@ class ApiStoryControllerTest extends AbstractApiControllerTest
             $client->getResponse()->getStatusCode()
         );
     }
+
+    public function testLike()
+    {
+        $client = static::createClient();
+
+        $client->request('POST', '/api/story/3/like.json', [
+            'token' => 3
+        ]);
+
+        $this->expectSuccessStatus($client);
+    }
 }
