@@ -62,6 +62,10 @@ class ApiStoryController extends AbstractApiController
             return $this->createMessageError('Story missing');
         }
 
+        $this
+            ->get('fs.stoty.data.provider')
+            ->like($story, $user);
+
         return $this->createSuccessAction();
     }
 
@@ -82,6 +86,10 @@ class ApiStoryController extends AbstractApiController
         if (empty($story)) {
             return $this->createMessageError('Story missing');
         }
+
+        $this
+            ->get('fs.stoty.data.provider')
+            ->unlike($story, $user);
 
         return $this->createSuccessAction();
     }

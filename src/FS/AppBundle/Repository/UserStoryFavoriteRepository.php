@@ -2,7 +2,9 @@
 
 namespace FS\AppBundle\Repository;
 
+use FS\AppBundle\Entity\Story;
 use FS\AppBundle\Entity\User;
+use FS\AppBundle\Entity\UserStoryFavorite;
 
 /**
  * UserStoryFavoriteRepository
@@ -42,5 +44,30 @@ class UserStoryFavoriteRepository extends \Doctrine\ORM\EntityRepository
             ->addGroupBy('usf.storyId')
             ->getQuery()
             ->getArrayResult();
+    }
+
+    public function create(Story $story, User $user)
+    {
+        $link = new UserStoryFavorite();
+        $link
+            ->setStory($story)
+            ->setUser($user)
+            ->setCreated(new \DateTime());
+
+        $this->getEntityManager()->persist($link);
+        $this->getEntityManager()->flush($link);
+    }
+
+    public function remove(Story $story, User $user)
+    {
+        $link = $this->findOneBy([
+            'story' => $story,
+            'user' => $user,
+        ]);
+
+        if ($link) {
+            $this->getEntityManager()->detach($link);
+            $this->getEntityManager()->flush($link);
+        }
     }
 }

@@ -5,6 +5,7 @@ namespace FS\AppBundle\Service;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use FS\AppBundle\Component\ApiListContainer;
 use FS\AppBundle\Component\Pager\StoryAdapter;
+use FS\AppBundle\Entity\Story;
 use FS\AppBundle\Entity\User;
 use Pagerfanta\Pagerfanta;
 
@@ -83,6 +84,22 @@ class StoryDataProvider
         }
 
         return new ApiListContainer($result, $pager);
+    }
+
+    public function like(Story $story, User $user)
+    {
+        $this
+            ->doctrine
+            ->getRepository('FSAppBundle:UserStoryFavorite')
+            ->create($story, $user);
+    }
+
+    public function unlike(Story $story, User $user)
+    {
+        $this
+            ->doctrine
+            ->getRepository('FSAppBundle:UserStoryFavorite')
+            ->remove($story, $user);
     }
 
     private function getInFaveMap(User $user, $storyIdList)
