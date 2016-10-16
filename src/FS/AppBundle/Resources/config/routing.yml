@@ -1,19 +1,35 @@
 api_status:
-    path:     /api/status.{_format}
+    path:   /api/status.{_format}
     defaults: { _controller: FSAppBundle:ApiDevice:status }
     methods: ['GET']
     requirements:
         _format: json
 
 api_stories:
-    path:     /api/stories.{_format}
+    path:   /api/stories.{_format}
     defaults: { _controller: FSAppBundle:ApiStory:list }
     methods: ['GET']
     requirements:
         _format: json
 
+api_story_like:
+    path:   /api/story/{id}/like.{_format}
+    defaults: { _controller: FSAppBundle:ApiStory:like }
+    methods: ['POST']
+    requirements:
+        id: \d+
+        _format: json
+
+api_story_unlike:
+    path:   /api/story/{id}/unlike.{_format}
+    defaults: { _controller: FSAppBundle:ApiStory:unlike }
+    methods: ['POST']
+    requirements:
+        id: \d+
+        _format: json
+
 api_categories:
-    path:     /api/categories.{_format}
+    path:   /api/categories.{_format}
     defaults: { _controller: FSAppBundle:ApiCategory:list }
     methods: ['GET']
     requirements:

@@ -43,4 +43,30 @@ class ApiStoryController extends AbstractApiController
 
         return $this->createSuccessListContainer($listContainer);
     }
+
+    /**
+     * @ApiDoc(
+     *      section="story",
+     *      description="Like",
+     * )
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function likeAction($id)
+    {
+
+    }
+
+    /**
+     * @ApiDoc(
+     *      section="story",
+     *      description="Unlike",
+     * )
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function unlikeAction($id)
+    {
+
+    }
 }
