@@ -240,5 +240,6 @@ class ApiStoryControllerTest extends AbstractApiControllerTest
         ]);
 
         $this->expectSuccessStatus($client);
+        $this->expectSuccessAction($client);
     }
 }
