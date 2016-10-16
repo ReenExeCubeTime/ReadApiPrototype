@@ -11,5 +11,8 @@ services:
 
     fs.auth.listener:
         class: 'FS\AppBundle\Service\AuthListener'
+        arguments:
+            - '@security.token_storage'
+            - '@doctrine'
         tags:
             - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }

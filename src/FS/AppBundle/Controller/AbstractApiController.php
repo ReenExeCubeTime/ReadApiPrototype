@@ -38,22 +38,4 @@ abstract class AbstractApiController extends Controller
             'success' => true,
         ]);
     }
-
-    /**
-     * TODO: this is hardCore `Auth`
-     * @return \FS\AppBundle\Entity\User|object
-     */
-    protected function getUser()
-    {
-        $request = $this->get('request_stack')->getCurrentRequest();
-
-        if ($userId = $request->query->get('token')) {
-            return $this
-                ->get('doctrine')
-                ->getRepository('FSAppBundle:User')
-                ->find($userId);
-        }
-
-        return null;
-    }
 }
