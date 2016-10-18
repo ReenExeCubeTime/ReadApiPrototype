@@ -2,6 +2,8 @@
 
 namespace FS\AppBundle\Repository;
 
+use FS\AppBundle\Entity\User;
+
 /**
  * UserActivityRepository
  *
@@ -10,4 +12,20 @@ namespace FS\AppBundle\Repository;
  */
 class UserActivityRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function create(User $user)
+    {
+        $table = $this->getClassMetadata()->getTableName();
+
+        $stmt = $this->getEntityManager()->getConnection()->prepare("
+            INSERT INTO `$table` (`user_id`, `activity`)
+            VALUES (:userId, :activity)
+            ON DUPLICATE KEY UPDATE
+                `activity` =:activity;
+        ");
+
+        $stmt->execute([
+            'userId' => $user->getId(),
+            'activity' => date(\DateTime::ISO8601)
+        ]);
+    }
 }

@@ -3,6 +3,7 @@
 namespace FS\AppBundle\Service;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
+use FS\AppBundle\Entity\User;
 use FS\AppBundle\Exception\ApiAuthenticationException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,6 +25,11 @@ class AuthListener
     private $doctrine;
 
     /**
+     * @var User|null
+     */
+    private $user;
+
+    /**
      * AuthListener constructor.
      * @param TokenStorageInterface $tokenStorage
      */
@@ -36,7 +42,7 @@ class AuthListener
     public function onKernelRequest(KernelEvent $event)
     {
         if ($userId = $event->getRequest()->get('token')) {
-            $user = $this
+            $this->user = $user = $this
                 ->doctrine
                 ->getRepository('FSAppBundle:User')
                 ->find($userId);
@@ -58,6 +64,16 @@ class AuthListener
                     'message' => 'Authentication is required',
                 ], Response::HTTP_UNAUTHORIZED)
             );
+        }
+    }
+
+    public function onKernelTerminate()
+    {
+        if ($this->user) {
+            $this
+                ->doctrine
+                ->getRepository('FSAppBundle:UserActivity')
+                ->create($this->user);
         }
     }
 }
