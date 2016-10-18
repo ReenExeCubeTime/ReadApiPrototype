@@ -1,0 +1,17 @@
+FS\AppBundle\Entity\UserActivity:
+    type: entity
+    table: fs_user_activity
+    repositoryClass: FS\AppBundle\Repository\UserActivityRepository
+
+    id:
+        userId:
+            type: integer
+            nullable: false
+            unsigned: true
+            id: true
+            column: user_id
+
+    fields:
+        activity:
+            type: datetime
+            nullable: false
